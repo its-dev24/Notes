@@ -60,4 +60,29 @@ const deleteNote = async (req, res) => {
   res.status(200).json({ msg: "note deleted Successfully!" });
 };
 
-export { getAllNotes, getNote, postNote, deleteNote };
+//@desc Method to Update specific Notes
+//@Route PUT /api/posts/:id
+
+const updateNote = async (req, res) => {
+  const id = req.params.d;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ msg: "Invalid MongoDB ID" });
+  }
+  const { title, noteBody } = req.body;
+  const note = notesModel.updateOne(
+    { _id: id },
+    {
+      $set: {
+        title: title,
+        noteBody: noteBody,
+      },
+    }
+  );
+  if (!note) {
+    return res.status(404).json({ msg: "No Notes foudn to update" });
+  }
+  res.status(200).json({ msg: "Note record updated sucessfully" });
+  console.log(note._id);
+};
+
+export { getAllNotes, getNote, postNote, deleteNote, updateNote };
