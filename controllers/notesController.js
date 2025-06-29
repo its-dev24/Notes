@@ -53,7 +53,7 @@ const deleteNote = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ msg: "Error : Not a valid MongoDB ID" });
   }
-  const note = notesModel.findOneAndDelete({ _id: id });
+  const note = await notesModel.findOneAndDelete({ _id: id });
   if (!note) {
     return res.status(404).json({ msg: "No Notes found of that ID" });
   }
