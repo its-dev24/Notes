@@ -41,7 +41,7 @@ const postNote = async (req, res) => {
   if (!note) {
     return res.status(500).json({ msg: "Failed to Insert Note" });
   }
-  res.staus(201).json({ msg: "Note inserted sucessfully" });
+  res.status(201).json({ msg: "Note inserted sucessfully" });
   console.log(`ID : ${note.ObjectId}`);
 };
 
