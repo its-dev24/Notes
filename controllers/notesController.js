@@ -27,4 +27,4 @@ const getNote = async (req, res) => {
   res.status(200).json(noteData);
 };
 
-export { getAllNotes };
+export { getAllNotes, getNote };
