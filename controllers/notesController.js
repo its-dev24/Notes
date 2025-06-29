@@ -27,4 +27,22 @@ const getNote = async (req, res) => {
   res.status(200).json(noteData);
 };
 
-export { getAllNotes, getNote };
+//@desc Method to create note
+//@Route POST /api/posts
+const postNote = async (req, res) => {
+  const { title, noteBody } = req.body;
+  if (!title || !noteBody) {
+    return res.status(400).json({ msg: "Title and ody cannot be empty" });
+  }
+  const note = await notesModel.create({
+    title,
+    noteBody,
+  });
+  if (!note) {
+    return res.status(500).json({ msg: "Failed to Insert Note" });
+  }
+  res.staus(201).json({ msg: "Note inserted sucessfully" });
+  console.log(`ID : ${note.ObjectId}`);
+};
+
+export { getAllNotes, getNote, postNote };
