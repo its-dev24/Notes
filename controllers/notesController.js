@@ -64,12 +64,12 @@ const deleteNote = async (req, res) => {
 //@Route PUT /api/posts/:id
 
 const updateNote = async (req, res) => {
-  const id = req.params.d;
+  const id = req.params.id;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ msg: "Invalid MongoDB ID" });
   }
   const { title, noteBody } = req.body;
-  const note = notesModel.updateOne(
+  const note = await notesModel.updateOne(
     { _id: id },
     {
       $set: {
