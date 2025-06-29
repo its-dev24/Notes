@@ -4,6 +4,7 @@ import {
   getAllNotes,
   getNote,
   postNote,
+  updateNote,
 } from "../controllers/notesController.js";
 
 const router = new Router();
@@ -19,5 +20,8 @@ router.post("/notes", postNote);
 
 //delete Note
 router.delete("/notes/:id", deleteNote);
+
+//update note
+router.put("/notes/:id", updateNote);
 
 export default router;
